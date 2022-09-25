@@ -13,8 +13,6 @@ public class Item {
     private String link;
     private String description;
     private byte[] image;
-    private int imageHeight;
-    private int imageWidth;
     private String creatorsNames;
 
     public Date getPubDate() {
@@ -55,22 +53,6 @@ public class Item {
 
     public void setImage(byte[] image) {
         this.image = image;
-    }
-
-    public int getImageHeight() {
-        return imageHeight;
-    }
-
-    public void setImageHeight(int imageHeight) {
-        this.imageHeight = imageHeight;
-    }
-
-    public int getImageWidth() {
-        return imageWidth;
-    }
-
-    public void setImageWidth(int imageWidth) {
-        this.imageWidth = imageWidth;
     }
 
     public String getCreatorsNames() {

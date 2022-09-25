@@ -122,12 +122,6 @@ public class RssRequestService {
                                                 break;
                                             case MEDIA_ELEMENT_NAME:
                                                 Element element = (Element) childNode;
-                                                if (element.hasAttribute(HEIGHT_ATTRIBUTE_NAME)) {
-                                                    item.setImageHeight(Integer.parseInt(element.getAttribute(HEIGHT_ATTRIBUTE_NAME)));
-                                                }
-                                                if (element.hasAttribute(WIDTH_ATTRIBUTE_NAME)) {
-                                                    item.setImageWidth(Integer.parseInt(element.getAttribute(WIDTH_ATTRIBUTE_NAME)));
-                                                }
                                                 if (element.hasAttribute(URL_ELEMENT_NAME)) {
                                                     getImage(element.getAttribute(URL_ELEMENT_NAME)).ifPresent(item::setImage);
                                                 }
@@ -176,59 +170,6 @@ public class RssRequestService {
         return Optional.empty();
     }
 
-//    private void parseChildren(Node node) {
-//        NodeList childNodes = node.getChildNodes();
-//        for (int i = 0; i < childNodes.getLength(); i++) {
-//            Node childNode = childNodes.item(i);
-//            if (node.getNodeType() == Node.ELEMENT_NODE && node.getNodeName().equals(ITEM_ELEMENT_NAME)) {
-//                if (childNode.getNodeType() == Node.ELEMENT_NODE && childNode.getNodeName().equals(PUB_DATE_ELEMENT_NAME)) {
-//                    if (childNode.hasChildNodes()) {
-//                        parseStringToDate(childNode.getFirstChild().getNodeValue())
-//                                .ifPresent(rssFeed::setChannelPubDate);
-//                    }
-//                }
-//                if (childNode.getNodeType() == Node.ELEMENT_NODE && childNode.getNodeName().equals(TITLE_ELEMENT_NAME)) {
-//                    if (childNode.hasChildNodes()) {
-//
-//                    }
-//                }
-//                if (childNode.getNodeType() == Node.ELEMENT_NODE && childNode.getNodeName().equals(DESCRIPTION_ELEMENT_NAME)) {
-//
-//                }
-//                if (childNode.getNodeType() == Node.ELEMENT_NODE && childNode.getNodeName().equals(MEDIA_ELEMENT_NAME)) {
-//
-//                }
-//                if (childNode.getNodeType() == Node.ELEMENT_NODE && childNode.getNodeName().equals(CREATOR_ELEMENT_NAME)) {
-//
-//                }
-//                if (childNode.getNodeType() == Node.ELEMENT_NODE && childNode.getNodeName().equals(LINK_ELEMENT_NAME)) {
-//
-//                }
-//            }
-//            if (node.getNodeType() == Node.ELEMENT_NODE && node.getNodeName().equals(CHANNEL_ELEMENT_NAME)) {
-//                if (childNode.getNodeType() == Node.ELEMENT_NODE && childNode.getNodeName().equals(PUB_DATE_ELEMENT_NAME)) {
-//                    if (childNode.hasChildNodes()) {
-//                        parseStringToDate(childNode.getFirstChild().getNodeValue())
-//                                .ifPresent(rssFeed::setChannelPubDate);
-//                    }
-//                }
-//                if (childNode.getNodeType() == Node.ELEMENT_NODE && childNode.getNodeName().equals(IMAGE_ELEMENT_NAME)) {
-//
-//                }
-//                if (childNode.getNodeType() == Node.ELEMENT_NODE && childNode.getNodeName().equals(ITEM_ELEMENT_NAME)) {
-//
-//                }
-//                if (childNode.getNodeType() == Node.ELEMENT_NODE && childNode.getNodeName().equals(LINK_ELEMENT_NAME)) {
-//
-//                }
-//            }
-//
-//            if (childNode.hasChildNodes()) {
-//                parseChildren(childNode);
-//            }
-//        }
-//    }
-
     private Optional<String> getRequest(String path) {
         String response = this.restTemplate.getForObject(path, String.class);
         if (response == null) {
@@ -237,10 +178,6 @@ public class RssRequestService {
         return Optional.of(response);
     }
 
-    private Optional<LocalDateTime> parseStringToDate1(String str) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(dateFormat);
-        return Optional.of(LocalDateTime.parse(str, formatter));
-    }
     private Optional<Date> parseStringToDate(String str) {
         try {
             return Optional.of(new SimpleDateFormat(dateFormat).parse(str));
